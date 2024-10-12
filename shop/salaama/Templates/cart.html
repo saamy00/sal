@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block title %}Your Cart{% endblock %}
+{% block content %}
+
+<style>
+    .thead-custom{
+        background-color: rgb(113, 83, 221);
+        color: white;
+    }
+    .cart-img{
+        width: 100px;
+        height: 100px;
+    }
+
+    @media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+  table thead {
+    display: none;
+  }
+  table tr {
+    margin-bottom: 10px;
+    display: block;
+    border-bottom: 2px solid #ddd;
+  }
+  table td {
+    display: block;
+    text-align: right;
+    font-size: 13px;
+    border-bottom: 1px dotted #ccc;
+  }
+  table td:last-child {
+    border-bottom: 0;
+  }
+  table td:before {
+    content: attr(data-label);
+    float: left;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  .cart-img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+</style>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="thead-custom">
+        <tr>
+          <th>Product</th>
+          <th>Name</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total</th>
+          <th>Remove</th>
+          <th>pay</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart_items %}
+        <tr>
+          <td data-label="Product">
+            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="img-fluid cart-img">
+          </td>
+          <td data-label="Name">{{ item.product.name }}</td>
+          <td data-label="Quantity">{{ item.quantity }}</td>
+          <td data-label="Price">${{ item.product.price }}</td>
+          <td data-label="Total">${{ item.total_price }}</td>
+          <td data-label="Remove">
+            <a href="{% url 'remove_from_cart' item.product.id %}" class="btn btn-danger btn-sm">Remove</a>
+          </td>
+          <td data-label="pay">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScrIlW5hUn05gWYeLRHQ5QmI73Fine6B0GI8D-v8WuQc2-nww/viewform?usp=sf_link" class="btn btn-danger btn-sm">pay</a>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+<h3>Total: ${{ total }}</h3>
+<a href="{% url 'product_list' %}" class="btn " style="background-color: rgb(145, 0, 0); color: white;">Continue 
+Shopping</a>
+</div>
+{% endblock %}

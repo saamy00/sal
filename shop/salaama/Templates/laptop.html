@@ -1,0 +1,19 @@
+{%extends 'Base.html'%}
+{%block content%}
+<h1>laptop</h1>
+<div class="row">
+{%for laptop in products%}
+<div class="col-md-6">
+    <div class="card">
+        <img src="{{laptop.image.url}}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{laptop.name}}</h5>
+            <p class="card-text">{{laptop.description}}</p>
+            <p class="card-text">Price:${{laptop.price}}</p>
+            <a href="{%url 'add_to_cart' laptop.id%}" class="btn btn-primary">Add to Cart</a>
+        </div>
+    </div>
+</div>
+{%endfor%}
+</div>
+{%endblock%}

@@ -1,0 +1,27 @@
+{%extends 'Base.html'%}
+{%block content%}
+<h1>headphone</h1>
+<div class="row">
+{%for headphone in products%}
+<div class="col-md-3">
+    <div class="card">
+        <img src="{{headphone.image.url}}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{headphone.name}}</h5>
+            <p class="card-text">{{headphone.description}}</p>
+            <p class="card-text">Price:${{headphone.price}}</p>
+            <a href="{%url 'add_to_cart' headphone.id%}" class="btn btn-primary">Add to Cart</a>
+        </div>
+    </div>
+</div>
+{%endfor%}
+</div>
+</div>
+
+{%endblock%}
+
+
+
+
+
+

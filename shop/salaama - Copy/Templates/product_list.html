@@ -1,0 +1,76 @@
+{%extends 'Base.html'%}
+{%block content%}
+
+
+
+
+
+<div class="row">
+
+
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel " style="margin-top: 20px;">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            {%for promotion in promotions%}
+            <div class="carousel-item{% if forloop.first%} active {%endif%}">
+                <img src="{{promotion.image.url}}" alt="" width="100%" height="500px">
+            </div>
+          
+            {%endfor%}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    
+    </div>
+    <h1>latest Product</h1>
+
+    <div class="row">
+      {%for lProduct in lproducts%}
+      <div class="col-md-3">
+          <div class="card" style="width:20rem; margin-top: 10px;" >
+              <img src="{{lProduct.image.url}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                  <h5 class="card-title">{{lProduct.name}}</h5>
+                  <p class="card-text">{{lProduct.description}}</p>
+                  <p class="card-text">Price:${{lProduct.price}}</p>
+                  <a href="{%url 'add_to_cart' lProduct.id%}" class="btn " style="background-color: rgb(197, 6, 6); color: white;">add to cart</a>
+              </div>
+          </div>
+      </div>
+      {%endfor%}
+  </div>
+
+
+
+<hr>
+
+
+
+<div class="row">
+  <h1>All Products</h1>
+    {%for Product in products%}
+    <div class="col-md-3">
+        <div class="card" style="width:20rem; margin-top: 10px;" >
+            <img src="{{Product.image.url}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{Product.name}}</h5>
+                <p class="card-text">{{Product.description}}</p>
+                <p class="card-text">Price:${{Product.price}}</p>
+                <a href="{%url 'add_to_cart' Product.id%}" class="btn " style="background-color: rgb(113, 83, 221); color: white;">add to cart</a>
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+</div>
+{%endblock%}
